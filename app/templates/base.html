@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TF's BLOG</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/mirages.min.css">
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/bootstrap.bundle.js"></script>
+    <script src="../static/js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+        .post-card-container {
+            background-size:100% 100%;
+            height: 248px;
+            width: 844px;
+            margin-right: auto;
+            margin-left: auto;
+            border-radius:9px;
+            padding-top: 90px;
+            padding-bottom: 90px;
+        }
+        span{
+            color: white;
+        }
+        h2{
+            color: white;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container-fluid" {% block photo %}{% endblock photo %}background-size:100% 100%;height: 436px">
+    <div class="row">
+        <div class="col-md-auto">
+            <button type="button" class="btn btn-default" aria-label="Left Align" style="background-color: inherit">
+                <i class="fas fa-home" style="font-size: 24px"></i>
+            </button>
+        </div>
+        <div class="col-md-1">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" style="background-color: inherit;border: 0px" type="button" onmouseover="func1()" onmouseout="func2()" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    文章分类
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="menu" onmouseover="func1()" onmouseout="func2()">
+                    <button class="dropdown-item" type="button">技术</button>
+                    <button class="dropdown-item" type="button">生活</button>
+                    <button class="dropdown-item" type="button"></button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-secondary" style="background-color: inherit;border: 0px;">留言</button>
+        </div>
+    </div>
+    <!-- 标题 -->
+    {% block title %}
+    {% endblock title %}
+
+</div>
+
+
+<div class="container-fluid" style="background-color: #ebebeb;padding-top: 70px;padding-bottom: 80px;">
+<!-- 内容正文 -->
+{% block content %}
+{% endblock content %}
+
+<!-- 评论区 -->
+{% block comment %}
+{% endblock comment %}
+
+</div>
+<!-- 尾标 -->
+<div class="text-center" style="background-color: #2c2a2a">
+    <footer style="padding-top: 15px;padding-bottom: 15px">
+        <p style="color: #b0b0b0">Copyright © 2018 TF's Blog</p>
+
+    </footer>
+</div>
+
+<script src="../static/js/bootstrap.bundle.js"></script>
+<script src="../static/js/bootstrap.js"></script>
+<script src="../static/js/jquery-2.1.1.min.js"></script>
+<script>
+    function func1() {
+        $(".dropdown-menu").css("display", "block");
+    }
+    function func2() {
+        $(".dropdown-menu").css("display", "none");
+    }
+</script>
+
+</body>
+
+</html>
