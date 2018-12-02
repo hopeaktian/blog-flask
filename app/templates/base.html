@@ -38,8 +38,8 @@
     <div class="row">
         <div class="col-md-auto">
             <a href="/">
-                <button type="button" class="btn btn-default" aria-label="Left Align" style="background-color: inherit">
-                    <i class="fas fa-home" style="font-size: 24px"></i>
+                <button type="button" class="btn btn-default" aria-label="Left Align" onmouseover="func3()" onmouseout="func4()" style="background-color: inherit">
+                    <i id="home" class="fas fa-home" style="font-size: 24px; color: white"></i>
                 </button>
             </a>
         </div>
@@ -99,6 +99,12 @@
     function func2() {
         $(".dropdown-menu").css("display", "none");
         $("#dropdownMenu2").css("color", "white");
+    }
+    function func3() {
+        $("#home").css("color", "#1abc9c");
+    }
+    function func4() {
+        $("#home").css("color", "white");
     }
 </script>
 
