@@ -15,7 +15,7 @@
         <div id="firstpage">
             {% if lenth != 0 %}
                 {% for i in range(lenth) %}
-                    <div style="padding-left: 322.6px;padding-right: 322.6px">
+{#                    <div style="padding-left: 322.6px;padding-right: 322.6px">#}
                         <a href="/post/{{ user_Post[i].Publish_Date.year }}/{{ user_Post[i].Publish_Date.month }}/{{ user_Post[i].Id }}" style="text-decoration: none;">
                             <div class="post-card-container" style="background-image: url(../static/Upload_Files/img/{{ user_Post[i].Cover_Picture_Name }});">
                                 <h2>{{ user_Post[i].Title }}</h2>
@@ -31,10 +31,10 @@
                                         {% endif %}
                                         <span></span>
                                     </div>
-                                </div
+                                </div>
                             </div>
                         </a>
-                    </div>
+{#                    </div>#}
                     <br>
                     <br>
                 {% endfor %}
@@ -55,7 +55,7 @@
     {% endif %}
 
     <div id="copy" style="visibility: hidden; display: none">
-        <div style="padding-left: 322.6px;padding-right: 322.6px">
+{#        <div style="padding-left: 322.6px;padding-right: 322.6px">#}
             <a href="#" id="Href" style="text-decoration: none;">
                 <div class="post-card-container" id="img_url" style="background-image: url(../static/img/header.jpg);">
                     <h2 id="title"></h2>
@@ -64,7 +64,7 @@
                     <span id="tag"></span>
                 </div>
             </a>
-        </div>
+{#        </div>#}
         <br>
         <br>
     </div>
