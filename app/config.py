@@ -11,4 +11,4 @@ class Config(object):
 
 class DevConfig(Config):
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:Redhat@120.79.139.82:3306/blog"
+    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:Yourpassword@yourdomain:3306/blog"
