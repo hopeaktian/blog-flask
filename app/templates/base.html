@@ -34,7 +34,7 @@
 
 </head>
 <body>
-<div class="container-fluid" style="{% block photo %}{% endblock photo %} background-size:100% 100%;height: 436px">
+<div class="container-fluid" style="{% block photo %}{% endblock photo %} background-repeat: no-repeat;background-size: cover">
     <div class="row">
         <div class="col-md-auto">
             <a href="/">
@@ -43,7 +43,7 @@
                 </button>
             </a>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-auto">
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" style="background-color: inherit;border: 0px" type="button" onmouseover="func1()" onmouseout="func2()" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     文章分类
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-auto" style="text-align: center">
             <a href="/messagewall">
                 <button class="btn btn-secondary" style="background-color: inherit;border: 0px;">留言</button>
             </a>

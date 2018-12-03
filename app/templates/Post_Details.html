@@ -63,7 +63,7 @@
 
 {% block title %}
     <h1 class="text-center" style="color: white;font-size: 60px; padding-top: 116px">{{ posts.Title }}</h1>
-    <p class="text-center" style="color: white">{{ posts.Publish_Date }}</p>
+    <p class="text-center" style="color: white; padding-bottom: 31px; margin-bottom: 0px; padding-bottom: 116px">{{ posts.Publish_Date }}</p>
 {% endblock title %}
 
 {% block content %}
@@ -92,7 +92,7 @@
     {#                    <input type="text" name="nickname" placeholder="">#}
     {#                </div>#}
                 </div>
-                <textarea class="text-area" name="leavemessage" placeholder="在此输入您的留言" required="required"></textarea>
+                <textarea class="text-area" name="leavemessage" placeholder="在此输入您的评论" required="required"></textarea>
                 <br>
                 <br>
                 <input type="submit" value="提交评论" class="mysubmit" id="submit" onmouseover="comein()" onmouseout="goout()" style="">
