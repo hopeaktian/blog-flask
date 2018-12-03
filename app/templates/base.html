@@ -8,6 +8,8 @@
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    {% block links %}
+    {% endblock %}
     <style>
         .post-card-container {
             background-size:100% 100%;
@@ -77,11 +79,18 @@
 <!-- 评论区 -->
 {% block comment %}
 {% endblock comment %}
+
+{% block link %}
+{% endblock link %}
+
 <!-- 尾标 -->
+
 <div class="container-fluid" style="background-color: #2c2a2a">
+
     <div class="text-center" >
         <footer style="padding-top: 20px;padding-bottom: 1px">
-            <p style="color: #b0b0b0; font-size: 15px">Copyright © 2018 TF's Blog</p>
+{#            <hr style="border:0;background-color: #777;height:1px;">#}
+            <p style="color: #b0b0b0; font-size: 13px">Copyright © 2018 TF's Blog</p>
 
         </footer>
     </div>

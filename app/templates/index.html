@@ -1,4 +1,11 @@
 {% extends 'base.html' %}
+
+{% block links %}
+{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>#}
+
+{% endblock links %}
+
 {% block style %}
 {% endblock style %}
 
@@ -48,7 +55,7 @@
         <div class="post-card-container">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <select id="pages" style="margin-bottom: 80px;width: 130px;height: 50px;border-radius:9px;">
+                    <select id="pages" style="margin-bottom: 80px;width: 130px;height: 40px;border-radius:9px;">
                         {% for i in range(pagination.pages) %}
                             <option value="{{ i+1 }}" >第{{ i+1 }}页</option>
                         {% endfor %}
@@ -127,3 +134,20 @@
 
     </script>
 {% endblock content %}
+
+{% block link %}
+    <div class="container-fluid" style="background-color: #2c2a2a">
+        <div class="text-center" >
+            <footer style="padding-top: 20px;padding-bottom: 1px">
+                <label style="color: #b0b0b0;font-size: 12px;margin-right: 60px">友情链接:  </label>
+                <a href="http://git.careyou.xin" style="color: #1abc9c; margin-right: 15px; font-size: 13px">• GitHub</a>
+                <a href="http://rooins.careyou.xin" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• 袋鼠共享打印</a>
+                <a href="https://me.csdn.net/ha_weii" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• Minza的博客</a>
+                <a href="https://me.csdn.net/salove_y" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• 携手凡生的博客</a>
+                <a href="http://blog.51cto.com/anfishr" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• 一百个小排的博客</a>
+                <br>
+                <a href="mailto:hopeaktian@foxmail.com" style="color: #CC9999; margin-right: 15px; font-size: 13px;">互加友情链接</a>
+            </footer>
+        </div>
+    </div>
+{% endblock link %}
