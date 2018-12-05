@@ -42,4 +42,4 @@ def index():
 app.register_blueprint(post)
 
 if __name__ == '__main__':
-    app.run(host='192.168.3.5', port=80)
+    app.run(host='localhost', port=80)

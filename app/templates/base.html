@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cmn-Hans">
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
@@ -8,6 +8,21 @@
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+    <script type="text/javascript">
+        $youziku.load("p", "7b22bf08c6554ee99c780fadfb10b856", "SongtiTC");
+        /*$youziku.load("#id1,.class1,h1", "7b22bf08c6554ee99c780fadfb10b856", "SongtiTC");*/
+        /*．．．*/
+        $youziku.draw();
+    </script>
+    <script type="text/javascript" src="http://cdn.webfont.youziku.com/wwwroot/js/wf/youziku.api.min.js"></script>
+    <script type="text/javascript">
+        $youziku.load("button", "529dced725d44c8a997f76c19a05485a", "PingFangSC_R");
+        /*$youziku.load("#id1,.class1,h1", "529dced725d44c8a997f76c19a05485a", "PingFangSC_R");*/
+        /*．．．*/
+        $youziku.draw();
+    </script>
+
     {% block links %}
     {% endblock %}
     <style>
@@ -29,7 +44,7 @@
         }
         @font-face{
             font-family: 华文中宋;
-            src: url("http://tf.careyou.xin/static/font/STZHONGS.woff") format('woff');
+            src: url("https://github.com/hopeaktian/blog/blob/master/app/static/font/STZHONGS.woff") format('woff');
 
 
         }
