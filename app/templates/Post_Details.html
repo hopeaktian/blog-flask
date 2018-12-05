@@ -2,8 +2,9 @@
 
 {% block style %}
     p{
-        font-family: Arial, serif;
+        font-family: Arial, '华文中宋';
         font-size: 18px;
+        line-height: 38px;
     }
     .message-card-container{
         width: 689px;
@@ -67,7 +68,7 @@
 {% endblock title %}
 
 {% block content %}
-    <div class="text-left" style="margin-left: 100px; margin-right: 100px">
+    <div class="text-left" style="margin-left: 150px; margin-right: 150px">
         {{ content | safe }}
     </div>
 {% endblock content %}
