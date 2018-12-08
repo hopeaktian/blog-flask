@@ -21,7 +21,7 @@ def index():
     if request.method == 'POST':
         page = request.form.get('page')
         page = int(page)
-        pagination = Post.query.filter(Post.User_Id == 1).order_by(Post.Id.desc()).paginate(page, per_page=2, error_out=False)
+        pagination = Post.query.filter(Post.User_Id == 1).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         tem = []
