@@ -21,7 +21,8 @@ class User(db.Model):
     Register_Date = db.Column(db.DateTime, default=datetime.datetime.now)
 
 tags = db.Table('Post_Tags',
-                db.Column('post_id', db.Integer, db.ForeignKey('Post.Id')),
+                db.Column('Id', db.Integer, primary_key=True),
+                db.Column('post_id', db.Integer, db.ForeignKey('Post.Id'), ),
                 db.Column('tag_id', db.Integer, db.ForeignKey('Tag.Id'))
 
                 )

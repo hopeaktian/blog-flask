@@ -28,7 +28,7 @@
             border-radius:9px;
             padding-top: 90px;
             padding-bottom: 90px;
-            box-shadow: 0 1px 7px rgba(0, 0, 0, 0.18);
+            box-shadow: 0 1px 7px rgba(224, 219, 219, 0.37);
             transition: all 0.6s;/*所有属性变化在0.6秒内执行动画*/
         }
         .post-card-container:hover{
@@ -73,10 +73,14 @@
 <div class="container-fluid" style="{% block photo %}{% endblock photo %} background-repeat: no-repeat;background-size: cover">
     <div class="row">
         <div class="col-md-auto">
-            <a href="/">
-                <button type="button" class="btn btn-default" aria-label="Left Align" onmouseover="func3()" onmouseout="func4()" style="background-color: inherit">
-                    <i id="home" class="fas fa-home" style="font-size: 24px; color: white"></i>
-                </button>
+            <a href="/" title="主页" id="home" onmouseover="func3()" onmouseout="func4()" style="color: white;text-decoration: none;" >
+{#                <button type="button" class="btn btn-secondary" aria-label="Left Align" onmouseover="func3()" onmouseout="func4()" style="background-color: inherit;border: 0px">#}
+{#                    <i id="home" class="fas fa-home" style="font-size: 24px; color: white"></i>#}
+{#                    <label style="color: white;font-size: inherit">主页</label>#}
+{#                    <img href="/static/img/logo.jpg">#}
+{#                </button>#}
+                <img src="/static/img/logo.jpg" style="width: 40px;height: 40px;border-radius:20px">
+                主页
             </a>
         </div>
         <div class="col-md-auto">
@@ -92,11 +96,11 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-auto" style="text-align: center">
-            <a href="/messagewall">
-                <button class="btn btn-secondary" style="background-color: inherit;border: 0px;">留言</button>
-            </a>
-        </div>
+{#        <div class="col-md-auto" style="text-align: center">#}
+{#            <a href="/messagewall">#}
+{#                <button class="btn btn-secondary" style="background-color: inherit;border: 0px;">留言</button>#}
+{#            </a>#}
+{#        </div>#}
     </div>
     <!-- 标题 -->
     {% block title %}
