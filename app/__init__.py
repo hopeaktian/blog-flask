@@ -10,6 +10,7 @@ from flask import Flask, redirect, url_for, render_template, session, g, jsonify
 from config import DevConfig
 from app.models import db, User, Comment, Post, Tag, tags
 from controllers.post import post
+from controllers.writer import writer
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
@@ -40,6 +41,7 @@ def index():
 
 
 app.register_blueprint(post)
+app.register_blueprint(writer)
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=80)
+    app.run(host='192.168.3.5', port=80)
