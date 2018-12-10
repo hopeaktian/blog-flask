@@ -46,7 +46,7 @@
 
     {% if pagination.pages >= 1 %}
         <div align="center">
-            <select id="pages" style="margin-bottom: 80px;">
+            <select id="pages" style="margin-bottom: 80px;width: 130px;height: 40px;border-radius:9px;">
                 {% for i in range(pagination.pages) %}
                     <option value="{{ i+1 }}" >第{{ i+1 }}页</option>
                 {% endfor %}

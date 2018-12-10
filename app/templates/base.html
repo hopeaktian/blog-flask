@@ -8,13 +8,19 @@
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
     {% block links %}
     {% endblock %}
     <style>
         .post-card-container {
-            background-size:100% 100%;
+            background-size: cover;
+            background-position: center;
+
+            overflow: hidden;
+            opacity: 1;
+            background-repeat: no-repeat;
             height: 248px;
             width: 844px;
             margin-right: auto;
@@ -22,6 +28,23 @@
             border-radius:9px;
             padding-top: 90px;
             padding-bottom: 90px;
+            box-shadow: 0 1px 7px rgba(0, 0, 0, 0.18);
+            transition: all 0.6s;/*所有属性变化在0.6秒内执行动画*/
+        }
+        .post-card-container:hover{
+            transform: scale(1.1);/*鼠标放上之后元素变成1.4倍大小*/
+        }
+        .firstpage{
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .post-select{
+            height: 100px;
+            width: 844px;
+            margin-right: auto;
+            margin-left: auto;
+            padding-top: 90px;
+            padding-bottom: 45px;
         }
         span{
             color: white;

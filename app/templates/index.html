@@ -19,7 +19,7 @@
 
 {% block content %}
     <div class="text-center" >
-        <div id="firstpage">
+        <div id="firstpage" class="firstpage" >
                 {% if lenth != 0 %}
                     {% for i in range(lenth) %}
 {#                        <div style="padding-left: 322.6px;padding-right: 322.6px">#}
@@ -33,7 +33,7 @@
                                             <span style="font-weight: 500">•</span>
                                             {% if user_Post[i].tags != None  %}
                                                 {% for i in user_Post[i].tags %}
-                                                    <span>{{ i.Title }}</span>
+                                                    <span style="color: #1abc9c">{{ i.Title }}</span>
                                                 {% endfor %}
                                             {% endif %}
                                             <span></span>
@@ -52,7 +52,7 @@
     </div>
 
     {% if pagination.pages >= 1 %}
-        <div class="post-card-container">
+        <div class="post-select">
             <div class="row">
                 <div class="col-md-12 text-right">
                     <select id="pages" style="margin-bottom: 80px;width: 130px;height: 40px;border-radius:9px;">
@@ -72,7 +72,7 @@
                     <h2 class="posttitle" id="title"></h2>
                     <br>
                     <span id="date"></span>
-                    <span id="tag"></span>
+                    <span id="tag" style="color: #1abc9c"></span>
                 </div>
             </a>
 {#        </div>#}
