@@ -7,6 +7,9 @@
 {% endblock links %}
 
 {% block style %}
+    container-fluaid{
+        background-color: #3B3F45;
+    }
 {% endblock style %}
 
 {% block photo %}
@@ -18,6 +21,7 @@
 {% endblock title %}
 
 {% block content %}
+<div class="container-fluid" style="background-color: #3B3F45;padding-top: 70px;padding-bottom: 80px;">
     <div class="text-center" >
         <div id="firstpage" class="firstpage" >
                 {% if lenth != 0 %}
@@ -131,6 +135,7 @@
 
 
     </script>
+</div>
 {% endblock content %}
 
 {% block link %}
