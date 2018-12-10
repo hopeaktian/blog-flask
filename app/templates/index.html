@@ -68,7 +68,7 @@
     <div id="copy" style="visibility: hidden; display: none">
 {#        <div style="padding-left: 322.6px;padding-right: 322.6px">#}
             <a href="#" id="Href" style="text-decoration: none;">
-                <div class="post-card-container" id="img_url" style="background-image: url(../static/img/header.jpg);">
+                <div class="post-card-container" id="img_url" style="background-image: url();">
                     <h2 class="posttitle" id="title"></h2>
                     <br>
                     <span id="date"></span>
@@ -83,8 +83,6 @@
     <script>
         $("#pages").change(function(){
 
-
-            document.getElementById('firstpage').innerHTML="";          // 将默认的第一页清空
             var opt=$("#pages").val();
             var data = {};
             data['page'] = opt;
@@ -94,6 +92,7 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
+                    document.getElementById('firstpage').innerHTML="";          // 将默认的第一页清空
                     for(var j =0;j<data.objects.length;j++){            // 循环产生新的订单列表
                         var firstpage = document.getElementById("firstpage");
 
@@ -107,11 +106,10 @@
 
                         var copy = document.getElementById("copy");
                         var mid = copy.innerHTML;
-                        mid = mid.replace('img_url','');
-                        mid = mid.replace('title','');
-                        mid = mid.replace('date','');
+                        mid = mid.replace(/id/g, '');
 
-                        var new_post=document.createElement("r");
+
+                        var new_post=document.createElement("post");
                         new_post.innerHTML=mid;
 
                         firstpage.appendChild(new_post);             // 将新产生的订单列表添加到清空了的firstpage中
