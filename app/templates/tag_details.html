@@ -71,9 +71,6 @@
 
     <script>
         $("#pages").change(function(){
-
-
-            document.getElementById('firstpage').innerHTML="";          // 将默认的第一页清空
             var opt=$("#pages").val();
             var data = {};
             data['page'] = opt;
@@ -83,6 +80,7 @@
                 data: data,
                 dataType: 'json',
                 success: function (data) {
+                    document.getElementById('firstpage').innerHTML="";          // 将默认的第一页清空
                     for(var j =0;j<data.objects.length;j++){            // 循环产生新的订单列表
                         var firstpage = document.getElementById("firstpage");
 
@@ -96,11 +94,9 @@
 
                         var copy = document.getElementById("copy");
                         var mid = copy.innerHTML;
-                        mid = mid.replace('img_url','');
-                        mid = mid.replace('title','');
-                        mid = mid.replace('date','');
+                        mid = mid.replace(/id/g, '');
 
-                        var new_post=document.createElement("r");
+                        var new_post=document.createElement("tag");
                         new_post.innerHTML=mid;
 
                         firstpage.appendChild(new_post);             // 将新产生的订单列表添加到清空了的firstpage中

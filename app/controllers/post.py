@@ -59,7 +59,7 @@ def tag(tagid):
         page = int(page)
         TAG = Tag.query.filter(Tag.Id == tagid).first()
         POST = TAG.posts
-        pagination = POST.order_by(Post.Id.desc()).paginate(page, per_page=2, error_out=False)
+        pagination = POST.order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         tem = []
@@ -73,7 +73,7 @@ def tag(tagid):
         page = int(page)
         TAG = Tag.query.filter(Tag.Id == tagid).first()
         POST = TAG.posts
-        pagination = POST.order_by(Post.Id.desc()).paginate(page, per_page=2, error_out=False)
+        pagination = POST.order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         return render_template('tag_details.html', user_Post=user_Post, lenth=lenth, pagination=pagination, title=TAG.Title)

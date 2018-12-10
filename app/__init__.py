@@ -33,7 +33,7 @@ def index():
     if request.method == 'GET':
         page = request.form.get('page', 1)
         page = int(page)
-        pagination = Post.query.filter(Post.User_Id == 1).order_by(Post.Id.desc()).paginate(page, per_page=2, error_out=False)
+        pagination = Post.query.filter(Post.User_Id == 1).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, title="TF'S BLOG")
