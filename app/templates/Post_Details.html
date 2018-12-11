@@ -114,19 +114,24 @@
 
                         <div class="col-md-11">
                             <div class="row">
-                                <div class="col-md-6"><h7 style="color: #1abc9c">{{ comments[i].Name }}</h7></div>
+                                <div class="col-md-auto"><h7 style="color: #1abc9c">{{ comments[i].Name }}</h7></div>
+                                {% if comments[i].Name == "落凤" %}
+                                    <div class="col-md-auto" style="height: .25rem">
+                                        <label  style="background: rgba(185,147,4,0.84);border-radius: .25rem;color: #fff;font-size: 0.75rem;margin-left: -25px">博主</label>
+                                    </div>
+                                {% endif %}
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-top: -12px;">
                                 <div class="col-md-6">
-                                    <p style="color: #9e9e9e; font-size: 13px">{{ comments[i].Date }}</p>
+                                    <p style="color: #9e9e9e; font-size: 13px;">{{ comments[i].Date }}</p>
                                 </div>
-                                <div class="col-md-6 text-right">
-                                    <h6 style="color: #1abc9c;font-size: 13px">回复</6>
-                                </div>
+{#                                <div class="col-md-6 text-right">#}
+{#                                    <h6 style="color: #1abc9c;font-size: 13px">回复</6>#}
+{#                                </div>#}
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <p style="color: white;font-size: 15px; line-height: 18px">{{ comments[i].text }}</p>
+                                    <p style="color: white;font-size: 15px; line-height: 18px;margin-top: -20px">{{ comments[i].text }}</p>
                                 </div>
 
                             </div>

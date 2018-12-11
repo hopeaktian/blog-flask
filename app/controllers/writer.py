@@ -10,7 +10,7 @@ description:
 from flask import Flask, Blueprint, render_template, request, flash, session, redirect, url_for, g
 import datetime, os
 from app.models import db, User, Comment, Post, Tag, tags
-from app.markdown_html import switch_html
+from app.sm import mail_admin
 from werkzeug.utils import secure_filename
 
 writer = Blueprint(
@@ -81,3 +81,18 @@ def write(uid):
 
     return render_template('writer.html')
 
+@writer.route('/addurl', methods=['GET', 'POST'])
+def addurl():
+    if request.method == 'POST':
+        urls = request.form.get("urls")
+        emails = request.form.get("emails")
+        leavemes = request.form.get("leavemessage")
+        try:
+            mail_admin(urls, emails, leavemes)
+        except:
+            flash(u"提交失败，请重试！ -_-||", category="warning")
+            return render_template('addurl.html')
+        else:
+            flash(u"提交成功啦，主人已经收到你的请求了哦！ ^_^", category="success")
+            return render_template('addurl.html')
+    return render_template('addurl.html')
