@@ -80,3 +80,9 @@ class Tag(db.Model):
     Id = db.Column(db.Integer(), primary_key=True)
     Title = db.Column(db.String(255), nullable=False)
 
+class Access(db.Model):
+    __tablename__ = 'Access'  #表名字默认是类名字的小写版本(如果没有此语句)
+
+    Id = db.Column(db.Integer(), primary_key=True)
+    Access_Date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
+    Ip = db.Column(db.String(255))

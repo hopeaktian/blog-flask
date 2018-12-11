@@ -16,6 +16,12 @@
     background: url(../static/img/header2.jpg) center;
 {% endblock photo %}
 
+{% block access %}
+    <div class="col-md-auto offset-md-7" style="text-align: right">
+        <label class="text-right" style="color: white; padding: 6px; font-size: 13px; margin-right: 4px">第{{ all_access }}位访客</label>
+    </div>
+{% endblock access %}
+
 {% block title %}
 <h1 class="text-center" style="color: white;font-size: 60px; padding-top: 116px; padding-bottom: 116px; margin-bottom: 0px">TF'S BLOG</h1>
 {% endblock title %}
