@@ -20,8 +20,8 @@ def send_mail(to_list,sub,content):
     msg['From'] = me  
     msg['To'] = ";".join(to_list)                #将收件人列表以‘；’分隔  
     try:  
-        server = smtplib.SMTP()  
-        server.connect(mail_host)                            #连接服务器  
+        server = smtplib.SMTP_SSL()  
+        server.connect(mail_host, 465)                            #连接服务器  
         server.login(mail_user,mail_pass)               #登录操作  
         server.sendmail(me, to_list, msg.as_string())  
         server.close()  
