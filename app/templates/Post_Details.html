@@ -67,6 +67,18 @@
     <p class="text-center" style="color: white; padding-bottom: 31px; margin-bottom: 0px; padding-bottom: 116px">{{ posts.Publish_Date }}</p>
 {% endblock title %}
 
+{% block access %}
+    {% for i in posts.tags %}
+        {% if "生活" in i.Title %}
+            <div class="col-md-auto offset-md-7" style="text-align: right">
+                <audio controls autoplay="autoplay" loop="loop" style="">
+                    <source src="/static/audio/2.mp3" type="audio/mpeg" />
+                </audio>
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock access %}
+
 {% block content %}
 <div class="container-fluid" style="background-color: #ebebeb;padding-top: 70px;padding-bottom: 80px;">
     <div class="text-left" style="margin-left: 150px; margin-right: 150px">
