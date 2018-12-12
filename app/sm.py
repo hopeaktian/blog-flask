@@ -31,7 +31,6 @@ def send_mail(to_list,sub,content):
         return False
 def mail_admin(urls,email,mes):
     message = str(urls) + " " + str(email) + " " + str(mes)
-    message = message.decode("utf-8")
     for i in range(1):                             #发送1封，上面的列表是几个人，这个就填几
         if send_mail(mailto_list,"互加友链请求",message):
             return 1
