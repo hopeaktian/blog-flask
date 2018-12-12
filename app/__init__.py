@@ -11,6 +11,7 @@ from config import DevConfig
 from app.models import db, User, Comment, Post, Tag, tags, Access
 from controllers.post import post
 from controllers.writer import writer
+from sqlalchemy import not_
 import json
 
 app = Flask(__name__)
@@ -20,10 +21,11 @@ db.init_app(app)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    secret = Tag.query.filter(Tag.Title == "私密").first()        # 查询私密tag对象
     if request.method == 'POST':
         page = request.form.get('page')
         page = int(page)
-        pagination = Post.query.filter(Post.User_Id == 1).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
+        pagination = Post.query.filter(Post.User_Id == 1, not_(Post.tags.contains(secret))).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         tem = []
@@ -43,9 +45,11 @@ def index():
         # 查询截至当前访问量
         all_access = len(Access.query.all())
 
+        # 查询首页文章列表
+
         page = request.form.get('page', 1)
         page = int(page)
-        pagination = Post.query.filter(Post.User_Id == 1).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
+        pagination = Post.query.filter(Post.User_Id == 1, not_(Post.tags.contains(secret))).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, all_access=all_access, title="TF'S BLOG")
