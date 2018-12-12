@@ -87,12 +87,14 @@ def addurl():
         urls = request.form.get("urls")
         emails = request.form.get("emails")
         leavemes = request.form.get("leavemessage")
+        leavemes = str(leavemes)
+        leavemes = leavemes.decode('utf-8')
         try:
             mail_admin(urls, emails, leavemes)
         except:
             flash(u"提交失败，请重试！ -_-||", category="warning")
-            return render_template('addurl.html')
+            # return render_template('addurl.html')
         else:
             flash(u"提交成功啦，主人已经收到你的请求了哦！ ^_^", category="success")
-            return render_template('addurl.html')
+            # return render_template('addurl.html')
     return render_template('addurl.html')
