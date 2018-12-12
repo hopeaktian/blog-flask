@@ -22,6 +22,7 @@ db.init_app(app)
 @app.route('/', methods=['POST', 'GET'])
 def index():
     secret = Tag.query.filter(Tag.Title == "私密").first()        # 查询私密tag对象
+    index_tag = Tag.query.filter(Tag.Title != "私密").all()
     if request.method == 'POST':
         page = request.form.get('page')
         page = int(page)
@@ -52,7 +53,7 @@ def index():
         pagination = Post.query.filter(Post.User_Id == 1, not_(Post.tags.contains(secret))).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
-        return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, all_access=all_access, title="TF'S BLOG")
+        return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, all_access=all_access, index_tag=index_tag, title="TF'S BLOG")
 
 @app.before_request
 def check_user():

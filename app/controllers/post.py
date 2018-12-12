@@ -11,6 +11,7 @@ import datetime, os
 from app.models import db, User, Comment, Post, Tag, tags
 from app.markdown_html import switch_html
 from werkzeug.utils import secure_filename
+from sqlalchemy import not_
 
 post = Blueprint(
     'post',
@@ -64,8 +65,10 @@ def tag(tagid):
         page = request.form.get('page')
         page = int(page)
         TAG = Tag.query.filter(Tag.Id == tagid).first()
+        SecretTag = Tag.query.filter(Tag.Title == "私密").first()
         POST = TAG.posts
-        pagination = POST.order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
+        pagination = POST.filter(not_(Post.tags.contains(SecretTag))).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
+        print len(pagination.items)
         user_Post = pagination.items
         lenth = len(user_Post)
         tem = []
@@ -78,8 +81,9 @@ def tag(tagid):
         page = request.form.get('page', 1)
         page = int(page)
         TAG = Tag.query.filter(Tag.Id == tagid).first()
+        SecretTag = Tag.query.filter(Tag.Title == "私密").first()
         POST = TAG.posts
-        pagination = POST.order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
+        pagination = POST.filter(not_(Post.tags.contains(SecretTag))).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
         return render_template('tag_details.html', user_Post=user_Post, lenth=lenth, pagination=pagination, title=TAG.Title)

@@ -71,7 +71,7 @@
     {% for i in posts.tags %}
         {% if "生活" in i.Title %}
             <div class="col-md-auto offset-md-7" style="text-align: right">
-                <audio controls autoplay="autoplay" loop="loop" style="">
+                <audio id="music" controls preload="preload" autoplay="autoplay" loop="loop" style="">
                     <source src="/static/audio/2.mp3" type="audio/mpeg" />
                 </audio>
             </div>
@@ -174,5 +174,6 @@
         function goout() {
             $("#submit").css("color", "#9e9e9e");
         }
+
     </script>
 {% endblock comment %}
