@@ -104,7 +104,13 @@
         {% block access %}
 
         {% endblock access %}
+
     </div>
+    {% if g.current_user_name != 'null' %}
+        <div class="row">
+            <label style="color: red;padding-left: 20px;font-size: 12px;">({{ g.current_user_name }})</label>
+        </div>
+    {% endif %}
 
     <!-- 标题 -->
     {% block title %}

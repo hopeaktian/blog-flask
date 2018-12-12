@@ -113,6 +113,20 @@
                 <input type="submit" value="提交评论" class="mysubmit" id="submit" onmouseover="comein()" onmouseout="goout()" style="">
             </form>
             <br>
+            <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" style="color: orangered; font-size: 60%; font-weight: 600">&times;关闭</span></button>
+                                <div class="text-center" style="font-weight: 600">{{ message }}</div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+            </div>
+            <br>
         </div>
         <div class="message-card-container">
             <p style="color: white">已有{{ lenth }}条评论</p>
@@ -127,7 +141,7 @@
                         <div class="col-md-11">
                             <div class="row">
                                 <div class="col-md-auto"><h7 style="color: #1abc9c">{{ comments[i].Name }}</h7></div>
-                                {% if comments[i].Name == "落凤" %}
+                                {% if comments[i].Name == "落风" %}
                                     <div class="col-md-auto" style="height: .25rem">
                                         <label  style="background: rgba(185,147,4,0.84);border-radius: .25rem;color: #fff;font-size: 0.75rem;margin-left: -25px">博主</label>
                                     </div>

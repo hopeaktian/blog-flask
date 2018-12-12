@@ -87,8 +87,7 @@ def addurl():
         urls = request.form.get("urls")
         emails = request.form.get("emails")
         leavemes = request.form.get("leavemessage")
-        leavemes = str(leavemes)
-        leavemes = leavemes.decode('utf-8')
+        leavemes = leavemes.encode('utf-8')
         try:
             mail_admin(urls, emails, leavemes)
         except:
@@ -98,3 +97,25 @@ def addurl():
             flash(u"提交成功啦，主人已经收到你的请求了哦！ ^_^", category="success")
             # return render_template('addurl.html')
     return render_template('addurl.html')
+
+@writer.route('/login/', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        Name = request.form.get("name")
+        Name = Name.encode("utf-8")
+        Password = request.form.get("password")
+        user = User.query.filter(User.Email == Name, User.Password == Password).first()
+        if user:
+            session['user_name'] = user.Name
+            g.current_user = user
+            flash(u"登陆成功啦！ ^_^", category="success")
+            return redirect('/')
+        else:
+            flash(u"登陆失败，请重试！ -_-||", category="warning")
+    return render_template('login.html')
+
+@writer.route("/logout", methods=['GET'])
+def logout():
+    session.pop('user_name', None)
+    g.current_user = None
+    return redirect('/')

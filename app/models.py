@@ -15,9 +15,9 @@ class User(db.Model):
     __tablename__ = 'User'  #表名字默认是类名字的小写版本(如果没有此语句)
 
     Id = db.Column(db.Integer(), primary_key=True)
+    Name = db.Column(db.String(255))
     Password = db.Column(db.String(255))
     Email = db.Column(db.String(255))
-    Tel_Number = db.Column(db.String(255))
     Register_Date = db.Column(db.DateTime, default=datetime.datetime.now)
 
 tags = db.Table('Post_Tags',

@@ -22,8 +22,7 @@ def postdetails(year,month,id):
     lenth = 0
     comments = Comment.query.filter(Comment.Post_Id == id).order_by(Comment.Id.desc()).all()
     lenth = len(comments)
-    global lenth
-    global comments
+
 
     content = ""
     posts = Post.query.filter(Post.User_Id == 1, Post.Id == id).first()
@@ -37,11 +36,18 @@ def postdetails(year,month,id):
 
 
     if request.method == "POST":
+        # 判断称呼是否合法
+        if request.form.get("nickname") == u"落风" and g.current_user_name != u"落风":
+            flash(u"评论的称呼已被博主使用了哦，换个称呼重试吧！ -_-||", category="warning")
+            return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title)
+
         commentforsql = Comment()
         commentforsql.Name = request.form.get("nickname")
         commentforsql.Email = request.form.get("email")
         commentforsql.text = request.form.get("leavemessage")
         commentforsql.Post_Id = id
+
+
 
         db.session.add(commentforsql)
         db.session.commit()

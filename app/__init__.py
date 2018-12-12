@@ -11,6 +11,7 @@ from config import DevConfig
 from app.models import db, User, Comment, Post, Tag, tags, Access
 from controllers.post import post
 from controllers.writer import writer
+import json
 
 app = Flask(__name__)
 app.config.from_object(DevConfig)
@@ -49,6 +50,16 @@ def index():
         lenth = len(user_Post)
         return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, all_access=all_access, title="TF'S BLOG")
 
+@app.before_request
+def check_user():
+    if 'user_name' in session:
+        g.current_user_name = session['user_name']
+        user = User.query.filter(User.Email == session['user_name']).first()
+        g.current_user = user
+
+    else:
+        g.current_user_name = json.dumps(None)
+        g.current_user = None
 
 app.register_blueprint(post)
 app.register_blueprint(writer)
