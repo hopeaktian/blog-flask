@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block style %}
+    p{
+    font-family: Arial, '华文中宋';
+    font-size: 18px;
+    line-height: 38px;
+    }
+    .message-card-container{
+    width: 689px;
+    margin-right: auto;
+    margin-left: auto;
+    }
+    .text-area{
+    display: inline-block;
+    padding: .438rem .525rem;
+    border: 0;
+    border-radius: .3125rem;
+    background: #343232;
+    color: #fff;
+    overflow-y: visible;
+    margin-top: .625rem;
+    width: 100%;
+    height: 100px;
+    vertical-align: top;
+    resize: none;
+    }
+
+{% endblock style %}
+
+{% block photo %}
+    background: url(../static/img/header2.jpg) center;
+{% endblock photo %}
+
+{% block title %}
+    <h1 class="text-center" style="color: white;font-size: 60px; padding-top: 116px; padding-bottom: 116px; margin-bottom: 0px">错误</h1>
+{% endblock title %}
+
+{% block content %}
+    <div class="container-fluid" style="background-color: #2c2a2a; padding-bottom: 100px">
+        <br>
+        <br>
+        <div class="message-card-container">
+            <div class="text-center">
+                <h4 style="color: #1abc9c">出错了，请重试</h4>
+            </div>
+
+            <br>
+            <div>
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true" style="color: orangered; font-size: 60%; font-weight: 600">&times;关闭</span></button>
+                                <div class="text-center" style="font-weight: 600">{{ message }}</div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

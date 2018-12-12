@@ -54,7 +54,7 @@ def index():
 def check_user():
     if 'user_name' in session:
         g.current_user_name = session['user_name']
-        user = User.query.filter(User.Email == session['user_name']).first()
+        user = User.query.filter(User.Name == session['user_name']).first()
         g.current_user = user
 
     else:
