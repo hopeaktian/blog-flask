@@ -70,7 +70,7 @@ def write(uid):
             parentdir = os.path.dirname(basepath)                       # 父级目录
             upload_path = os.path.join(parentdir, 'static/Upload_Files/img', secure_filename(new_cover_name))
             new_cover.save(upload_path)
-            upload_path = os.path.join(parentdir, 'static/Upload_Files/img', secure_filename(new_markdown_name))
+            upload_path = os.path.join(parentdir, 'static/Upload_Files/markdown', secure_filename(new_markdown_name))
             new_cover.save(upload_path)
 
 
