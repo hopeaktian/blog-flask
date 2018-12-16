@@ -68,10 +68,12 @@ def write(uid):
             # 保存文件
             basepath = os.path.abspath(os.path.dirname(__file__))       # 当前文件所在目录
             parentdir = os.path.dirname(basepath)                       # 父级目录
+            # 保存封面图
             upload_path1 = os.path.join(parentdir, 'static/Upload_Files/img', secure_filename(new_cover_name))
             new_cover.save(upload_path1)
+            # 保存markdown文件
             upload_path2 = os.path.join(parentdir, 'static/Upload_Files/markdown', secure_filename(new_markdown_name))
-            new_cover.save(upload_path2)
+            new_markdown.save(upload_path2)
 
 
 
