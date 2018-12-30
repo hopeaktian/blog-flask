@@ -11,6 +11,7 @@ from config import DevConfig
 from app.models import db, User, Comment, Post, Tag, tags, Access
 from controllers.post import post
 from controllers.writer import writer
+from controllers.loginout import loginout
 from sqlalchemy import not_
 import json
 
@@ -68,6 +69,7 @@ def check_user():
 
 app.register_blueprint(post)
 app.register_blueprint(writer)
+app.register_blueprint(loginout)
 
 if __name__ == '__main__':
     app.run(host='192.168.3.5', port=80)

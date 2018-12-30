@@ -12,6 +12,7 @@ from app.models import db, User, Comment, Post, Tag, tags
 from app.markdown_html import switch_html
 from werkzeug.utils import secure_filename
 from sqlalchemy import not_
+from app.sm import mail_admin
 
 post = Blueprint(
     'post',
@@ -87,3 +88,20 @@ def tag(tagid):
         user_Post = pagination.items
         lenth = len(user_Post)
         return render_template('tag_details.html', user_Post=user_Post, lenth=lenth, pagination=pagination, title=TAG.Title)
+
+@post.route('/addurl', methods=['GET', 'POST'])
+def addurl():
+    if request.method == 'POST':
+        urls = request.form.get("urls")
+        emails = request.form.get("emails")
+        leavemes = request.form.get("leavemessage")
+        leavemes = leavemes.encode('utf-8')
+        try:
+            mail_admin(urls, emails, leavemes)
+        except:
+            flash(u"提交失败，请重试！ -_-||", category="warning")
+            # return render_template('addurl.html')
+        else:
+            flash(u"提交成功啦，主人已经收到你的请求了哦！ ^_^", category="success")
+            # return render_template('addurl.html')
+    return render_template('addurl.html')

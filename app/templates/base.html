@@ -68,6 +68,20 @@
         img{
             width: 100%;
         }
+        .function-card{
+            width: 250px;
+            height: 250px;
+            border-style: solid;
+            border-width:1px;
+            border-color: #b0b0b0;
+            border-radius: 0.7em;
+            background-color: #343232;
+            box-shadow: 0 1px 7px rgba(224, 219, 219, 0.37);
+            transition: all 0.6s;/*所有属性变化在0.6秒内执行动画*/
+        }
+        .function-card:hover{
+            transform: scale(1.1);/*鼠标放上之后元素变成1.4倍大小*/
+        }
         @font-face{
             font-family: 华文中宋;
             src: url("https://github.com/hopeaktian/blog/blob/master/app/static/font/STZHONGS.woff") format('woff');

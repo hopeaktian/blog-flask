@@ -10,13 +10,26 @@ description:
 from flask import Flask, Blueprint, render_template, request, flash, session, redirect, url_for, g
 import datetime, os
 from app.models import db, User, Comment, Post, Tag, tags
-from app.sm import mail_admin
+
 from werkzeug.utils import secure_filename
 
 writer = Blueprint(
     'writer',
     __name__
 )
+
+@writer.before_request
+def checklogin():
+    if g.current_user == None:
+        return redirect('/login')
+
+
+
+@writer.route('/root', methods=['GET', 'POST'])
+def root():
+    return render_template('root.html')
+
+
 
 @writer.route('/writer/<int:uid>', methods=['GET', 'POST'])
 def write(uid):
@@ -88,41 +101,3 @@ def write(uid):
 
         return render_template('writer.html')
 
-@writer.route('/addurl', methods=['GET', 'POST'])
-def addurl():
-    if request.method == 'POST':
-        urls = request.form.get("urls")
-        emails = request.form.get("emails")
-        leavemes = request.form.get("leavemessage")
-        leavemes = leavemes.encode('utf-8')
-        try:
-            mail_admin(urls, emails, leavemes)
-        except:
-            flash(u"提交失败，请重试！ -_-||", category="warning")
-            # return render_template('addurl.html')
-        else:
-            flash(u"提交成功啦，主人已经收到你的请求了哦！ ^_^", category="success")
-            # return render_template('addurl.html')
-    return render_template('addurl.html')
-
-@writer.route('/login/', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        Name = request.form.get("name")
-        Name = Name.encode("utf-8")
-        Password = request.form.get("password")
-        user = User.query.filter(User.Email == Name, User.Password == Password).first()
-        if user:
-            session['user_name'] = user.Name
-            g.current_user = user
-            flash(u"登陆成功啦！ ^_^", category="success")
-            return redirect('/')
-        else:
-            flash(u"登陆失败，请重试！ -_-||", category="warning")
-    return render_template('login.html')
-
-@writer.route("/logout", methods=['GET'])
-def logout():
-    session.pop('user_name', None)
-    g.current_user = None
-    return redirect('/')
