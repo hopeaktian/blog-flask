@@ -30,7 +30,7 @@
 <div class="container-fluid" style="background-color: #2c2a2a;padding-top: 70px;padding-bottom: 80px;">
 
     <div class="text-center" >
-        <div id="firstpage" class="firstpage" >         <!--首页默认文章列表-->
+        <div id="firstpage" class="firstpage center" >         <!--首页默认文章列表-->
                 {% if lenth != 0 %}
                     {% for i in range(lenth) %}
                             <a href="/post/{{ user_Post[i].Publish_Date.year }}/{{ user_Post[i].Publish_Date.month }}/{{ user_Post[i].Id }}" style="text-decoration: none;">
