@@ -35,6 +35,8 @@ class Post(db.Model):
     Publish_Date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)        # 文章日期
     Cover_Picture_Name = db.Column(db.String(255))                              # 封面图片名字
     Content_Name = db.Column(db.String(255))                                    # 内容markdown文件名字
+    Music_Name = db.Column(db.String(255))                                      # 音乐名，可为空
+    Dir_Name = db.Column(db.String(255))                                        # 文章目录
 
     User_Id = db.Column(db.Integer(), db.ForeignKey('User.Id'))                 # 作者
     user = db.relationship('User', foreign_keys='Post.User_Id')
@@ -57,6 +59,7 @@ class Post(db.Model):
             'Publish_Date': Publish_date,
             'Publish_year': Publish_year,
             'Publish_month': Publish_month,
+            'Dir_Name': self.Dir_Name,
             'Cover_Picture_Name': self.Cover_Picture_Name,
             'Id': self.Id
         }

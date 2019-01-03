@@ -42,6 +42,7 @@ def write(uid):
             new_title = request.form.get("title")
             new_cover = request.files['cover']
             new_markdown = request.files['markdown']
+            new_music = request.files['music']
             new_tag = request.form.get("tag")
             # 查询是否title重名
             if Post.query.filter(Post.Title == new_title and Post.User_Id == uid).first() is not None:
@@ -78,15 +79,26 @@ def write(uid):
             new_cover_name = str(pid) + new_cover_name[new_cover_point:]
             new_markdown_name = str(pid) + new_markdown_name[new_markdown_point:]
 
-            # 保存文件
+
+            # 获取目录
             basepath = os.path.abspath(os.path.dirname(__file__))       # 当前文件所在目录
             parentdir = os.path.dirname(basepath)                       # 父级目录
+            #  新建目录
+            datetimes = post_checksql.Publish_Date
+            now = str(datetimes.year)+"-"+str(datetimes.month)+"-"+str(datetimes.day)
+            newdirname = now + "_" + post_checksql.Title
+            new_dirpath = os.path.join(parentdir, 'static/Upload_Files/article', newdirname)
+            os.mkdir(new_dirpath)
             # 保存封面图
-            upload_path1 = os.path.join(parentdir, 'static/Upload_Files/img', secure_filename(new_cover_name))
+            upload_path1 = os.path.join(parentdir, 'static/Upload_Files/article', newdirname, secure_filename(new_cover_name))
             new_cover.save(upload_path1)
             # 保存markdown文件
-            upload_path2 = os.path.join(parentdir, 'static/Upload_Files/markdown', secure_filename(new_markdown_name))
+            upload_path2 = os.path.join(parentdir, 'static/Upload_Files/article', newdirname, secure_filename(new_markdown_name))
             new_markdown.save(upload_path2)
+            # 保存音乐
+            if new_music is not None:
+                upload_path3 = os.path.join(parentdir, 'static/Upload_Files/article', newdirname, secure_filename(new_music.filename))
+                new_markdown.save(upload_path3)
 
 
 
@@ -94,6 +106,9 @@ def write(uid):
             # 第二次提交数据库
             post_checksql.Cover_Picture_Name = new_cover_name
             post_checksql.Content_Name = new_markdown_name
+            post_checksql.Dir_Name = newdirname
+            if new_music is not None:
+                post_checksql.Music_Name = new_music.filename
             db.session.add(post_checksql)
             db.session.commit()
 

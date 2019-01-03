@@ -59,7 +59,7 @@
 {% endblock style %}
 
 {% block photo %}
-    background: url(/static/Upload_Files/img/{{ posts.Cover_Picture_Name }}) center;
+    background: url(/static/Upload_Files/article/{{ posts.Dir_Name }}/{{ posts.Cover_Picture_Name }}) center;
 {% endblock photo %}
 
 {% block title %}
@@ -69,10 +69,10 @@
 
 {% block access %}
     {% for i in posts.tags %}
-        {% if "生活" in i.Title %}
+        {% if posts.Music_Name is not None %}
             <div class="col-md-auto offset-md-7" style="text-align: right">
                 <audio id="music" controls preload="preload" autoplay="autoplay" loop="loop" style="">
-                    <source src="/static/audio/2.mp3" type="audio/mpeg" />
+                    <source src="/static/Upload_Files/article/{{ posts.Dir_Name }}/{{ posts.Music_Name }}" type="audio/mpeg" />
                 </audio>
             </div>
         {% endif %}

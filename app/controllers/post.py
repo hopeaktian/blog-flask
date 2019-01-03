@@ -31,8 +31,11 @@ def postdetails(year,month,id):
     post_file = posts.Content_Name
     basepath = os.path.abspath(os.path.dirname(__file__))       # 当前文件所在目录
     parentdir = os.path.dirname(basepath)                       # 父级目录
+    datetimes = posts.Publish_Date
+    # now = str(datetimes.year)+"-"+str(datetimes.month)+"-"+str(datetimes.day)
+    # newdirname = now + "_" + posts.Title
     if post_file != None:
-        post_file_url = os.path.join(parentdir, 'static/Upload_Files/markdown', secure_filename(post_file))
+        post_file_url = os.path.join(parentdir, 'static/Upload_Files/article', posts.Dir_Name, secure_filename(post_file))
         content = switch_html(post_file_url)
 
 
@@ -56,9 +59,9 @@ def postdetails(year,month,id):
 
         comments = Comment.query.filter(Comment.Post_Id == id).order_by(Comment.Id.desc()).all()
         lenth = len(comments)
-        return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title)
+        return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title, newdirname=newdirname)
 
-    return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title)
+    return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title, newdirname=newdirname)
 
 @post.route('/tag/<int:tagid>', methods=['GET', 'POST'])
 def tag(tagid):
