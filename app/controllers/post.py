@@ -59,9 +59,9 @@ def postdetails(year,month,id):
 
         comments = Comment.query.filter(Comment.Post_Id == id).order_by(Comment.Id.desc()).all()
         lenth = len(comments)
-        return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title, newdirname=newdirname)
+        return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title)
 
-    return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title, newdirname=newdirname)
+    return render_template('Post_Details.html', posts=posts, content=content, lenth=lenth, comments=comments, title=posts.Title)
 
 @post.route('/tag/<int:tagid>', methods=['GET', 'POST'])
 def tag(tagid):
