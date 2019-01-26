@@ -42,7 +42,10 @@ def write(uid):
             new_title = request.form.get("title")
             new_cover = request.files['cover']
             new_markdown = request.files['markdown']
-            new_music = request.files['music']
+            if request.files.has_key("music"):
+                new_music = request.files['music']
+            else:
+                new_music = None
             new_tag = request.form.get("tag")
             # 查询是否title重名
             if Post.query.filter(Post.Title == new_title and Post.User_Id == uid).first() is not None:
