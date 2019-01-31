@@ -1,4 +1,3 @@
-# TF's blog
-This project is aimed to create a blog that belong to myself.
-# 图片规格
-1900*547
+# blog-flask
+## 自己用Flask写博客系统，并不断优化中更新中
+博客地址：http://www.careyou.xin
