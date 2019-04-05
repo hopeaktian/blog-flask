@@ -9,11 +9,23 @@
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+    <script>
+        setTimeout(function(){
+            document.getElementsByTagName('body')[0].style.height = window.innerHeight+'px';
+        },20);
+    </script>
 
     {% block links %}
     {% endblock %}
     <style>
+        body{
+            background: url(/static/img/grand-sky.jpg) center;
+            background-attachment:fixed;
+            background-size: cover;
+            background-position: center;
+            opacity: 1;
+            background-repeat: no-repeat;
+        }
         .post-card-container {
             background-size: cover;
             background-position: center;
@@ -155,14 +167,29 @@
 </div>
 
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-9" style="padding: 0px;">
+            <!-- 内容正文 -->
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <div class="col-md-3">
+            <!-- 评论区 -->
+            {% block right_side %}
+            {% endblock right_side %}
+        </div>
+    </div>
 
-<!-- 内容正文 -->
-{% block content %}
-{% endblock content %}
 
-<!-- 评论区 -->
-{% block comment %}
-{% endblock comment %}
+</div>
+{#<!-- 内容正文 -->#}
+{#{% block content %}#}
+{#{% endblock content %}#}
+{##}
+{#<!-- 评论区 -->#}
+{#{% block comment %}#}
+{#{% endblock comment %}#}
 
 {% block link %}
 {% endblock link %}
