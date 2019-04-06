@@ -8,12 +8,12 @@
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/jquery-2.1.1.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script>
+        /* 设置body高度为屏幕高度*/
         setTimeout(function(){
             document.getElementsByTagName('body')[0].style.height = window.innerHeight+'px';
         },20);
-        <!-- 加载-->
+        <!-- 加载中-->
         document.onreadystatechange = function () {
             if(document.readyState === "complete"){
                 $("#loading").fadeOut();
@@ -72,7 +72,7 @@
             width: 844px;
             margin-right: auto;
             margin-left: auto;
-            padding-top: 90px;
+            padding-top: 60px;
             padding-bottom: 45px;
         }
         .center {
@@ -123,6 +123,12 @@
             margin: auto;
             background: url("/static/img/loding2.gif") no-repeat;
         }
+        .middle {
+            float: none;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
 
 
 
@@ -139,22 +145,16 @@
 </div>
 
 <div class="container-fluid" style="{% block photo %}{% endblock photo %} background-repeat: no-repeat;background-size: cover">
-    <div class="row">
-        <div class="col-md-auto">
-            <a href="/" title="首页" id="home" onmouseover="func3()" onmouseout="func4()" style="color: white;text-decoration: none;" >
-{#                <button type="button" class="btn btn-secondary" aria-label="Left Align" onmouseover="func3()" onmouseout="func4()" style="background-color: inherit;border: 0px">#}
-{#                    <i id="home" class="fas fa-home" style="font-size: 24px; color: white"></i>#}
-{#                    <label style="color: white;font-size: inherit">主页</label>#}
-{#                    <img href="/static/img/logo.jpg">#}
-{#                </button>#}
-                <img src="/static/img/logo.jpg" style="width: 40px;height: 40px;border-radius:20px">
-                首页
+    <div class="row align-items-center">
+        <div class="col-md-auto align-items-center">
+            <a href="/" class="align-items-center" title="首页" id="home" onmouseover="func3()" onmouseout="func4()" style="color: white;font-weight: 600;text-decoration: none;" >
+                HOME
             </a>
         </div>
         <div class="col-md-auto">
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" style="background-color: inherit;border: 0px" type="button" onmouseover="func1()" onmouseout="func2()" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    文章分类
+                <button class="btn btn-secondary dropdown-toggle" style="background-color: inherit;font-weight: 600;border: 0px" type="button" onmouseover="func1()" onmouseout="func2()" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    CLASS
                 </button>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="menu" onmouseover="func1()" onmouseout="func2()">
