@@ -13,6 +13,9 @@
     body{
         background-color: #2c2a2a;
     }
+    a.link{
+        color: #83c200;font-size: 16px
+    }
 {% endblock style %}
 
 {% block photo %}
@@ -26,7 +29,7 @@
 {% endblock access %}
 
 {% block title %}
-<h1 class="text-center" style="color: white;font-size: 60px; padding-top: 90px;margin-bottom: 30px">TF'S BLOG</h1> <br>
+<h1 class="text-center" style="color: white;font-family: 'Arial Black'; font-size: 60px; padding-top: 90px;margin-bottom: 30px">TF'S BLOG</h1> <br>
 {% endblock title %}
 
 {% block content %}
@@ -148,25 +151,12 @@
 </div>
 {% endblock content %}
 
-{% block link %}
-    <div class="container-fluid" style="background-color: #2c2a2a">
-        <div class="text-center" >
-            <footer style="padding-top: 20px;padding-bottom: 1px">
-                <label style="color: #b0b0b0;font-size: 12px;margin-right: 60px">友情链接:  </label>
-                <a href="http://git.careyou.xin" style="color: #1abc9c; margin-right: 15px; font-size: 13px">• MyGitHub</a>
-                <a href="http://rooins.careyou.xin" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• 袋鼠共享打印</a>
-                <a href="https://me.csdn.net/ha_weii" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• Minz的博客</a>
-                <a href="https://me.csdn.net/salove_y" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• 携手凡生的博客</a>
-                <a href="http://blog.51cto.com/anfishr" style="color: #1abc9c; margin-right: 15px; font-size: 13px;">• 一百个小排的博客</a>
-                <br>
-                <a href="/addurl" style="color: #CC9999; margin-right: 15px; font-size: 13px;">互加友情链接</a>
-            </footer>
-        </div>
-    </div>
-{% endblock link %}
+{#{% block link %}#}
+{#{% endblock link %}#}
 
 {% block right_side %}
-    <div class="container-fluid" style="background-color: #2c2a2a69;padding-top: 70px;padding-bottom: 80px;">
+    <div class="container-fluid" style="background-color: #2c2a2a69;position: relative;overflow:hidden">
+        <br>
         <!--头像-->
         <div class="row align-items-center" style="padding-left: 10px">
             <img src="/static/img/logo.jpg" style="width: 70px;height: 70px;border-radius:40px">
@@ -176,15 +166,34 @@
         <div class="row" style="padding-left: 10px">
             <i class="" style="color: #b5b5b5;font-size: 18px;margin-top: 10px;margin-bottom: 0px; padding-bottom: 10px ">海到无边天作岸，山登绝顶我为峰</i>
         </div>
-        <!--浏览量-->
-        <label class="" style="color: #72eff8c7; padding: 6px; font-size: 14px;padding: 0px;margin-bottom: 0px;margin-top: 4px">第{{ all_access }}次浏览</label>
         <!--标签云-->
-        <div class="post-select">
-            <h5 style="color: white">标签云</h5>
+        <div class="right-module">
+            <h5 style="color: white">标签云</h5><hr class="faded">
             <br>
             {% for tag in index_tag %}
-                <a href="/tag/{{ tag.Id }}" class="tag">{{ tag.Title }}</a>
+                <label style="margin: 4px"><a href="/tag/{{ tag.Id }}" class="tag">{{ tag.Title }}</a></label>
             {% endfor %}
         </div>
+        <!--友情链接-->
+        <div class="right-module" >
+            <h5 style="color: white">友情链接</h5><hr class="faded">
+            <br>
+            <a class="link" href="http://git.careyou.xin">• MyGitHub</a><br>
+            <a class="link" href="http://rooins.careyou.xin" >• 袋鼠共享打印</a><br>
+            <a class="link" href="https://me.csdn.net/ha_weii">• Minz的博客</a><br>
+            <a class="link" href="https://me.csdn.net/salove_y">• 携手凡生的博客</a><br>
+            <a class="link" href="http://blog.51cto.com/anfishr">• 一百个小排的博客</a><br>
+            <div class="text-center"><a href="#" class="icon"><img src="/static/font/more2.png" class="" style="width: 30px;height: 10px">更多</a></div>
+
+        </div>
+        <!--站点信息-->
+        <div class="right-module">
+            <h5 style="color: white">站点信息</h5><hr class="faded">
+            <br>
+            <span class="list">• 文章总数：</span><br>
+            <span class="list">• 访问总数：</span><span style="color: #e1e1e1">{{ all_access }}</span><br>
+            <span class="list">• 运行时长：</span><br>
+        </div>
+
     </div>
 {% endblock right_side %}
