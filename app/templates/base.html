@@ -13,6 +13,12 @@
         setTimeout(function(){
             document.getElementsByTagName('body')[0].style.height = window.innerHeight+'px';
         },20);
+        <!-- 加载-->
+        document.onreadystatechange = function () {
+            if(document.readyState === "complete"){
+                $("#loading").fadeOut();
+            }
+        }
     </script>
 
     {% block links %}
@@ -97,14 +103,27 @@
         .function-card:hover{
             transform: scale(1.1);/*鼠标放上之后元素变成1.4倍大小*/
         }
-        /*
-        @font-face{
-            font-family: 华文中宋;
-            src: url("https://github.com/hopeaktian/blog/blob/master/app/static/font/STZHONGS.woff") format('woff');
-
-
+        #loading{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(24,30,37);
+            position: fixed;
+            top:0;
+            left: 0;
+            z-index: 9999;
         }
-        */
+        #loading >i{
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right: 0;
+            margin: auto;
+            background: url("/static/img/loding2.gif") no-repeat;
+        }
+
 
 
         {% block style %}
@@ -114,6 +133,11 @@
 
 </head>
 <body>
+<!--加载中-->
+<div id="loading">
+    <i></i>
+</div>
+
 <div class="container-fluid" style="{% block photo %}{% endblock photo %} background-repeat: no-repeat;background-size: cover">
     <div class="row">
         <div class="col-md-auto">
