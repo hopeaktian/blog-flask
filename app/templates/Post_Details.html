@@ -68,18 +68,7 @@
 {% endblock title %}
 
 {% block access %}
-    {% for i in posts.tags %}
-        {% if posts.Music_Name is not none %}
-            <div class="col-md-7" style="padding-right: 0px">
-                <label style="color: white;background-color: #06060659;padding: 12px;margin: 1px;float: right">{{ posts.Music_Name }}</label>
-            </div>
-            <div class="col-md-auto " style="text-align: right;padding-left: 0px">
-                <audio id="music" controls preload="preload" autoplay="autoplay" loop="loop" style="direction: rtl;">
-                    <source src="/static/Upload_Files/article/{{ posts.Dir_Name }}/{{ posts.Music_Name }}" type="audio/mpeg" />
-                </audio>
-            </div>
-        {% endif %}
-    {% endfor %}
+
 {% endblock access %}
 
 {% block musicname %}
@@ -103,14 +92,27 @@
 </div>
 {% endblock content %}
 
+<!--右栏-->
 {% block right_side %}
     <div class="container-fluid" style="background-color: #2c2a2a69; padding-bottom: 100px;border-radius: 0.5rem">
         <br>
-        <br>
-        <div class="message-card-container">
-            <div>
-                <h4 style="color: white">添加新评论</h4>
+        <!--BGM-->
+        <h5 style="color: white">BGM</h5><hr class="faded">
+        {% if posts.Music_Name is not none %}
+            <div class="col-md-auto">
+                <label style="color: #00bcd4;font-size: 0.9em;margin: 1px;float: right">{{ posts.Music_Name }}</label>
             </div>
+            <div>
+                <div class="col-md-auto " style="text-align: right;padding-left: 0px">
+                    <audio id="music" controls preload="preload" autoplay="autoplay" loop="loop" style="direction: rtl;">
+                        <source src="/static/Upload_Files/article/{{ posts.Dir_Name }}/{{ posts.Music_Name }}" type="audio/mpeg" />
+                    </audio>
+                </div>
+            </div>
+        {% endif %}
+        <!--评论区-->
+        <h5 style="color: white">添加新评论</h5><hr class="faded">
+        <div class="message-card-container">
             <form method="post">
                 <div class="row" style="padding-top: 10px;">
                     <div class="col-md-4">
