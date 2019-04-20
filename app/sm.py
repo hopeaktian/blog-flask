@@ -10,7 +10,7 @@ import os, time
 mailto_list=["hopeaktian@foxmail.com"] 
 mail_host="smtp.sohu.com"  #设置服务器
 mail_user="hopeaktian@sohu.com"    #用户名
-mail_pass="tf1998225"   #口令 
+mail_pass="*********"   #口令
 mail_postfix="sohu.com"  #发件箱的后缀
 
 def send_mail(to_list,sub,content):
