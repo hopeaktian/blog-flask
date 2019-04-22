@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 
 {% block links %}
-{#    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css">#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>#}
-
+    <script src="/static/js/my.js"></script>
 {% endblock links %}
 
 {% block style %}
@@ -160,7 +158,7 @@
         <!--头像-->
         <div class="row align-items-center" style="padding-left: 10px">
             <img src="/static/img/logo.jpg" style="width: 70px;height: 70px;border-radius:40px">
-            <h4 style="color: white;padding-left: 10px;">PEAK</h4>
+            <h4 style="color: white;padding-left: 10px;">Ryan </h4>
         </div>
         <!--格言-->
         <div class="row" style="padding-left: 10px">
@@ -191,9 +189,11 @@
         <div class="right-module">
             <h5 style="color: white">站点信息</h5><hr class="faded">
             <br>
-            <span class="list">• 文章总数：</span><br>
-            <span class="list">• 访问总数：</span><span style="color: #e1e1e1">{{ all_access }}</span><br>
-            <span class="list">• 运行时长：</span><br>
+            <span class="list">• 文章总数：</span><span style="color: #e1e1e1">{{ website_info['articles_count'] }}</span><br>
+            <span class="list">• 访问总数：</span><span style="color: #e1e1e1">{{ website_info['all_access'] }}</span><br>
+            <span class="list">• 运行时长：</span><label id="lengthtime" style="color: #e1e1e1"">
+            <script type="text/javascript">showlentime();</script>
+            </label><br>
         </div>
 
     </div>

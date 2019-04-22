@@ -44,9 +44,6 @@ def index():
         db.session.add(access_forsql)
         db.session.commit()
 
-        # 查询截至当前访问量
-        all_access = len(Access.query.all())
-
         # 查询首页文章列表
 
         page = request.form.get('page', 1)
@@ -54,7 +51,15 @@ def index():
         pagination = Post.query.filter(Post.User_Id == 1, not_(Post.tags.contains(secret))).order_by(Post.Id.desc()).paginate(page, per_page=6, error_out=False)
         user_Post = pagination.items
         lenth = len(user_Post)
-        return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, all_access=all_access, index_tag=index_tag, title="TF'S BLOG")
+
+        # 站点信息
+        website_info = {}                               # 创建空站点信息字典
+        all_access = Access.query.count()               # 查询截至当前访问量
+        articles_count = Post.query.count()             # 查询文章总量
+        website_info['all_access'] = all_access
+        website_info['articles_count'] = articles_count
+
+        return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, website_info=website_info, index_tag=index_tag, title="TF'S BLOG")
 
 @app.before_request
 def check_user():
@@ -72,4 +77,4 @@ app.register_blueprint(writer)
 app.register_blueprint(loginout)
 
 if __name__ == '__main__':
-    app.run(host='192.168.3.5', port=80)
+    app.run(host='localhost', port=80)
