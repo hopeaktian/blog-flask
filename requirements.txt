@@ -10,6 +10,7 @@ idna==2.7
 ipaddress==1.0.22
 itsdangerous==1.1.0
 Jinja2==2.10
+Markdown==3.1
 MarkupSafe==1.1.0
 pycparser==2.19
 PyMySQL==0.9.2

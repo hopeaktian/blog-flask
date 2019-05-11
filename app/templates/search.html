@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block head_right %}
+    <!--搜索框-->
+    <div class="input-group col-md-3" style="margin-top:0px positon:relative">
+        <form style="display: flex;" method="get" action="/search">
+           <input type="text" class="form-control" placeholder="请输入关键字" name="keyword"
+                  style="background: rgba(255,255,255,0.08)"/>
+            <span class="input-group-btn">
+               <button class="btn btn-info btn-search" type="submit">搜索</button>
+            </span>
+        </form>
+     </div>
+{% endblock %}
+{% block title %}
+    <!--文章列表-->
+    <div class="container-fluid" style="background-color: #2c2a2a69;padding-top: 70px;padding-bottom: 80px;">
+    <div class="text-center" >
+        <div id="firstpage" class="firstpage center" >         <!--首页默认文章列表的文章卡片-->
+                {% if lenth != 0 %}
+                    {% for i in range(lenth) %}
+                            <a class="text-center" href="/post/{{ articles[i].Publish_Date.year }}/{{ articles[i].Publish_Date.month }}/{{ articles[i].Id }}" style="text-decoration: none;">
+                                <div class="post-card-container" style="background-image: url(../static/Upload_Files/article/{{ articles[i].Dir_Name }}/{{ articles[i].Cover_Picture_Name }});">
+                                    <h2 class="posttitle">{{ articles[i].Title }}</h2>
+                                    <br>
+                                    <div class="col-md-12">
+                                        <span>{{ articles[i].Publish_Date }}</span>
+                                        <span style="font-weight: 500">•</span>
+                                        {% if articles[i].tags != None  %}
+                                            {% for i in articles[i].tags %}
+                                                <a href="/tag/{{ i.Id }}" style="text-decoration: none"><span class="tag-text">{{ i.Title }}</span></a>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </a>
+{#                        </div>#}
+                        <br>
+                        <br>
+                    {% endfor %}
+                {% else %}
+                {% endif %}
+        </div>
+    </div>
+
+    <!--分页按钮-->
+    <div>
+    {% if search_result and search_result.pages >= 1 %}
+        <div class="post-select">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <select id="pages" style="margin-bottom: 80px;width: 130px;height: 40px;border-radius:9px;">
+                        {% for i in range(search_result.pages) %}
+                            <option value="{{ i+1 }}" >第{{ i+1 }}页</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+    <!--后端数据-->
+    <div id="backdata_keyword" style="display: none;">{{ keyword }}</div><!--搜索关键字-->
+    <!--文章卡片分页显示的模板html,用于后面ajax分页生成新文章卡片页面-->
+    <div id="copy" style="visibility: hidden; display: none">
+            <a href="#" id="Href" style="text-decoration: none;">
+                <div class="post-card-container" id="img_url" style="background-image: url();">
+                    <h2 class="posttitle" id="title"></h2>
+                    <br>
+                    <span id="date"></span>
+                </div>
+            </a>
+        <br>
+        <br>
+    </div>
+
+    <script>
+        $("#pages").change(function(){
+
+            var page_count=$("#pages").val();
+            var keyword=$("#backdata_keyword").text();
+            var data = {};
+            data['page'] = page_count;
+            data['keyword'] = keyword;
+            $.ajax({								// 提交POST请求给后端
+                type: 'POST',
+                url: '/search/pagination',
+                data: data,
+                dataType: 'json',
+                success: function (data) {
+                    document.getElementById('firstpage').innerHTML="";          // 将默认的第一页清空
+                    for(var j =0;j<data.objects.length;j++){            // 循环产生新的订单列表,data.objects是后端返回的json
+                        var firstpage = document.getElementById("firstpage");
+                        // 根据后端数据构造文章卡片中的背景url和超链接Href变量
+                        var url = "url(../static/Upload_Files/article/"
+                            + data.objects[j].Dir_Name + "/" + data.objects[j].Cover_Picture_Name +")";
+                        var Href = "/post/"+ data.objects[j].Publish_year
+                            +"/"+data.objects[j].Publish_month+"/"+data.objects[j].Id;
+                        // 将事先定义好的id为copy的div中的元素的值进行替换，构造文章卡片的html
+
+                        $("#img_url").css("background-image", url);
+                        $("#Href").attr("href", Href);
+                        $("#title").text(data.objects[j].Title);
+                        $("#date").text(data.objects[j].Publish_Date);
+
+                        var copy = document.getElementById("copy");
+                        var mid = copy.innerHTML;
+                        mid = mid.replace(/id/g, '');
+
+
+                        var new_post=document.createElement("post");
+                        new_post.innerHTML=mid;
+
+                        firstpage.appendChild(new_post);             // 将新产生的订单列表添加到清空了的firstpage中
+                    }
+                },
+                error: function () {
+                }
+            })
+
+        });
+    </script>
+
+{% endblock title %}

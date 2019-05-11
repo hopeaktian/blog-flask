@@ -14,17 +14,36 @@
     a.link{
         color: #83c200;font-size: 16px
     }
+    input{
+        height: 2rem;
+        line-height: 1rem;
+        display: inline-block;
+        padding: .438rem .525rem;
+        border: 0;
+        width: 200%;
+        height: 35px;
+        border-radius: .3125rem;
+        background: #343232b3;
+        color: #fff;
+    }
 {% endblock style %}
 
 {% block photo %}
     background: url(../static/img/big-home.jpg) center;
 {% endblock photo %}
 
-{% block access %}
-{#    <div class="col-md-auto offset-md-7" style="text-align: right">#}
-{#        <label class="text-right" style="color: #01b1bec7; padding: 6px; font-size: 13px; margin-right: 4px; margin-bottom: 0px;margin-top: 4px">第{{ all_access }}次浏览</label>#}
-{#    </div>#}
-{% endblock access %}
+{% block head_right %}
+
+    <div class="input-group col-md-3" style="margin-top:0px positon:relative">
+        <form style="display: flex;" method="get" action="/search">
+           <input type="text" class="form-control" placeholder="请输入关键字" name="keyword"
+                  style="background: rgba(255,255,255,0.08)"/>
+            <span class="input-group-btn">
+               <button class="btn btn-info btn-search" type="submit">搜索</button>
+            </span>
+        </form>
+     </div>
+{% endblock head_right %}
 
 {% block title %}
 <h1 class="text-center" style="color: white;font-family: 'Arial Black'; font-size: 60px; padding-top: 90px;margin-bottom: 30px">TF'S BLOG</h1> <br>
@@ -32,26 +51,22 @@
 
 {% block content %}
 <div class="container-fluid" style="background-color: #2c2a2a69;padding-top: 70px;padding-bottom: 80px;">
-
     <div class="text-center" >
-        <div id="firstpage" class="firstpage center" >         <!--首页默认文章列表-->
+        <div id="firstpage" class="firstpage center" >         <!--首页默认文章列表的文章卡片-->
                 {% if lenth != 0 %}
                     {% for i in range(lenth) %}
                             <a class="text-center" href="/post/{{ user_Post[i].Publish_Date.year }}/{{ user_Post[i].Publish_Date.month }}/{{ user_Post[i].Id }}" style="text-decoration: none;">
-                                <div class="post-card-container" onmouseover="funcon" onmouseout="funcout" style="background-image: url(../static/Upload_Files/article/{{ user_Post[i].Dir_Name }}/{{ user_Post[i].Cover_Picture_Name }});">
+                                <div class="post-card-container" style="background-image: url(../static/Upload_Files/article/{{ user_Post[i].Dir_Name }}/{{ user_Post[i].Cover_Picture_Name }});">
                                     <h2 class="posttitle">{{ user_Post[i].Title }}</h2>
                                     <br>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <span>{{ user_Post[i].Publish_Date }}</span>
-                                            <span style="font-weight: 500">•</span>
-                                            {% if user_Post[i].tags != None  %}
-                                                {% for i in user_Post[i].tags %}
-                                                    <span style="color: #1abc9c">{{ i.Title }}</span>
-                                                {% endfor %}
-                                            {% endif %}
-                                            <span></span>
-                                        </div>
+                                    <div class="col-md-12">
+                                        <span>{{ user_Post[i].Publish_Date }}</span>
+                                        <span style="font-weight: 500">•</span>
+                                        {% if user_Post[i].tags != None  %}
+                                            {% for i in user_Post[i].tags %}
+                                                <a href="/tag/{{ i.Id }}" style="text-decoration: none"><span class="tag-text">{{ i.Title }}</span></a>
+                                            {% endfor %}
+                                        {% endif %}
                                     </div>
                                 </div>
                             </a>
@@ -60,11 +75,10 @@
                         <br>
                     {% endfor %}
                 {% else %}
-
                 {% endif %}
         </div>
     </div>
-
+<!--分页按钮-->
     {% if pagination.pages >= 1 %}
         <div class="post-select">
             <div class="row">
@@ -79,18 +93,16 @@
         </div>
     {% endif %}
 
-
+<!--文章卡片分页显示的模板html,用于后面ajax分页生成新文章卡片页面-->
     <div id="copy" style="visibility: hidden; display: none">
-{#        <div style="padding-left: 322.6px;padding-right: 322.6px">#}
             <a href="#" id="Href" style="text-decoration: none;">
                 <div class="post-card-container" id="img_url" style="background-image: url();">
                     <h2 class="posttitle" id="title"></h2>
                     <br>
                     <span id="date"></span>
-                    <span id="tag" style="color: #1abc9c"></span>
+
                 </div>
             </a>
-{#        </div>#}
         <br>
         <br>
     </div>
@@ -108,15 +120,20 @@
                 dataType: 'json',
                 success: function (data) {
                     document.getElementById('firstpage').innerHTML="";          // 将默认的第一页清空
-                    for(var j =0;j<data.objects.length;j++){            // 循环产生新的订单列表
+                    for(var j =0;j<data.objects.length;j++){            // 循环产生新的订单列表,data.objects是后端返回的json
                         var firstpage = document.getElementById("firstpage");
-
-                        var url = "url(../static/Upload_Files/article/" + data.objects[j].Dir_Name + "/" + data.objects[j].Cover_Picture_Name +")";
-                        var Href = "/post/"+ data.objects[j].Publish_year+"/"+data.objects[j].Publish_month+"/"+data.objects[j].Id;
+                        // 根据后端数据构造文章卡片中的背景url和超链接Href变量
+                        var url = "url(../static/Upload_Files/article/"
+                            + data.objects[j].Dir_Name + "/" + data.objects[j].Cover_Picture_Name +")";
+                        var Href = "/post/"+ data.objects[j].Publish_year
+                            +"/"+data.objects[j].Publish_month+"/"+data.objects[j].Id;
+                        // 将事先定义好的id为copy的div中的元素的值进行替换，构造文章卡片的html
+                        
                         $("#img_url").css("background-image", url);
+                        $("#Href").attr("href", Href);
                         $("#title").text(data.objects[j].Title);
                         $("#date").text(data.objects[j].Publish_Date);
-                        $("#Href").attr("href", Href);
+                        $("#tag").text(data.objects[j].Title);
 
 
                         var copy = document.getElementById("copy");

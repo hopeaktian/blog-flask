@@ -65,6 +65,13 @@
             text-decoration: none;
             color: #1abc9c;
         }
+        .tag-text{
+            color: #1abc9c;
+            transition: all 0.4s;
+        }
+        .tag-text:hover{
+            color: #03eccb;
+        }
         a.icon{
             color: #d8d8d8;
             text-decoration: none;
@@ -193,9 +200,9 @@
 {#                <button class="btn btn-secondary" style="background-color: inherit;border: 0px;">留言</button>#}
 {#            </a>#}
 {#        </div>#}
-        {% block access %}
+        {% block head_right %}
 
-        {% endblock access %}
+        {% endblock head_right %}
 
     </div>
     {% block musicname %}
