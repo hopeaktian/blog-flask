@@ -83,7 +83,7 @@
             data['keyword'] = keyword;
             $.ajax({								// 提交POST请求给后端
                 type: 'POST',
-                url: '/search/pagination',
+                url: '/search/',
                 data: data,
                 dataType: 'json',
                 success: function (data) {

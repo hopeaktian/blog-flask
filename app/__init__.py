@@ -8,11 +8,12 @@ description:
 """
 from flask import Flask, redirect, url_for, render_template, session, g, jsonify, request
 from config import DevConfig
-from app.models import db, User, Comment, Post, Tag, tags, Access
+from app.models import db, User, Comment, Post, Tag, tags, Access, Like
 from controllers.post import post
 from controllers.writer import writer
 from controllers.loginout import loginout
 from controllers.search import search
+from controllers.guest_feedback import guest_feedback
 from sqlalchemy import not_
 import json
 
@@ -35,7 +36,7 @@ def index():
         for x in user_Post:
             tem.append(x.to_json())
         print jsonify(tem)
-        return jsonify(objects = tem)
+        return jsonify(objects=tem)
 
     if request.method == 'GET':
         # 记录访问信息
@@ -57,8 +58,12 @@ def index():
         website_info = {}                               # 创建空站点信息字典
         all_access = Access.query.count()               # 查询截至当前访问量
         articles_count = Post.query.count()             # 查询文章总量
+        like_count = Like.query.filter(Like.Like_Type == 1).count()     # 查询点赞总数
+        cancellike = Like.query.filter(Like.Like_Type == 0).count()
+        like_count = like_count - cancellike
         website_info['all_access'] = all_access
         website_info['articles_count'] = articles_count
+        website_info['like_count'] = like_count
 
         return render_template('index.html', user_Post=user_Post, lenth=lenth, pagination=pagination, website_info=website_info, index_tag=index_tag, title="TF'S BLOG")
 
@@ -77,6 +82,7 @@ app.register_blueprint(post)
 app.register_blueprint(writer)
 app.register_blueprint(loginout)
 app.register_blueprint(search)
+app.register_blueprint(guest_feedback)
 
 if __name__ == '__main__':
     app.run(host='localhost', port=80)

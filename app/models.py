@@ -71,11 +71,8 @@ class Comment(db.Model):
     Name = db.Column(db.String(255), nullable=False)
     Email = db.Column(db.String(255), nullable=False)
     text = db.Column(db.Text())
-    Date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)                #日期
+    Date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)                # 日期
     Post_Id = db.Column(db.Integer(), db.ForeignKey('Post.Id'))
-
-
-
 
 class Tag(db.Model):
     __tablename__ = 'Tag'
@@ -84,8 +81,14 @@ class Tag(db.Model):
     Title = db.Column(db.String(255), nullable=False)
 
 class Access(db.Model):
-    __tablename__ = 'Access'  #表名字默认是类名字的小写版本(如果没有此语句)
+    __tablename__ = 'Access'  # 表名字默认是类名字的小写版本(如果没有此语句)
 
     Id = db.Column(db.Integer(), primary_key=True)
     Access_Date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     Ip = db.Column(db.String(255))
+
+class Like(db.Model):
+    __tablename__ = 'Like'
+    Id = db.Column(db.Integer(), primary_key=True)
+    Like_Date = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
+    Like_Type = db.Column(db.Integer())             # 0为取消点赞，1为点赞

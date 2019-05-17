@@ -1,0 +1,228 @@
+.shadow {
+    position: relative;
+    width: 20%;
+    float: left;
+    border: 1px solid #ccc;
+    height: 100px;
+    margin: 20px;
+    background: white;
+    text-align: center;
+    padding-top: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+
+.shadow::before,
+.shadow::after {
+    content: "";
+    position: absolute;
+    z-index: -2;
+}
+
+/*=============
+	 transform问题
+  =============*/
+.shadow1 {
+    transform: rotate(3deg);
+}
+.shadow1::before,
+.shadow1::after {
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+    max-width: 300px;
+}
+
+.shadow1::after{
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+/*=============
+	  微折角
+  =============*/
+.shadow2::before,
+.shadow2::after {
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+    max-width: 300px;
+}
+
+.shadow2::after{
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+
+/*=============
+	折起角效果
+  =============*/
+.shadow3 {
+    border-radius: 0 0 120px 120px / 0 0 6px 6px;
+}
+.shadow3::before,
+.shadow3::after {
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+    transform: rotate(-3deg);
+    max-width: 300px;
+}
+
+.shadow3::after{
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+/*=============
+	凸起效果
+  =============*/
+.shadow4 {
+    box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+/*=============
+	旋转效果
+  =============*/
+.shadow5 {
+    transform: rotate(3deg);
+}
+.shadow5 p {
+    margin: 0;
+}
+.shadow5 p::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: #fff;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.shadow5::before,
+.shadow5::after {
+    bottom: 15px;
+    left: 10px;
+    width: 50%;
+    height: 20%;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+    transform: rotate(-3deg);
+    max-width: 300px;
+}
+
+.shadow5::after{
+    right: 10px;
+    left: auto;
+    transform: rotate(3deg);
+}
+
+/*=============
+	凸显效果
+  =============*/
+.shadow6 {
+    transition:all 0.3s ease;
+}
+.shadow6:hover{
+    border:1px solid rgba(82, 168, 236, 0.6);
+    box-shadow: 0 0 8px rgba(82, 168, 236, 0.6),0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+/*=============
+	对角折起效果
+  =============*/
+.shadow7::before{
+    content:"";
+    width:50%;
+    height:50%;
+    left:0;
+    top:0;
+    box-shadow:-20px -30px 15px rgba(0,0,0,0.2);
+    transform:skew(10deg,10deg) translate(40px,30px);
+}
+.shadow7::after{
+    content:"";
+    width:50%;
+    height:50%;
+    right:0;
+    top:50%;
+    box-shadow:20px 30px 15px rgba(0,0,0,0.2);
+    transform:skew(10deg,10deg) translate(-40px,-20px);
+}
+
+/*=============
+	书页效果
+	三个框的重叠
+  1. 原盒子
+  2. before
+  3. after
+  =============*/
+.shadow8{
+    background: linear-gradient(100% 50%, #fff, #fff 10%, #f3f3f3);
+    border-bottom-right-radius: 60px 5px;
+}
+.shadow8::before{
+    content:"";
+    width:98%;
+    height:98%;
+    left:0;
+    top:0;
+    background-color:#fff;
+    border: 1px solid #ccc;
+    transform:skew(4deg, 2deg) translate(6px, 7px);
+    border-bottom-right-radius: 60px 5px;
+}
+.shadow8::after{
+    content:"";
+    width:98%;
+    height:98%;
+    left:0;
+    top:0;
+    background-color:#fff;
+    border: 1px solid #ccc;
+    transform:skew(3deg, 1deg) translate(4px, 4px);
+}
+/* 黏贴纸效果 */
+.shadow9{
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.shadow9::before{
+    content:"";
+    width:110px;
+    height:30px;
+    background-color:rgba(255,255,0,0.2);
+    z-index:1;
+    top:8px;
+    left:-32px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    transform:rotate(-45deg);
+}
+.shadow9::after{
+    content:"";
+    width:110px;
+    height:30px;
+    background-color:rgba(255,255,0,0.2);
+    z-index:1;
+    bottom:8px;
+    right:-32px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    transform:rotate(-45deg);
+}
+
+/* 点赞 */
+.like{ font-size:66px;  color: #ffffff; cursor:pointer;}
+.cs{color:#f00;}

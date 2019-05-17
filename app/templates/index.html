@@ -2,6 +2,7 @@
 
 {% block links %}
     <script src="/static/js/my.js"></script>
+    <link rel="stylesheet" href="/static/css/my.css">
 {% endblock links %}
 
 {% block style %}
@@ -26,14 +27,18 @@
         background: #343232b3;
         color: #fff;
     }
+    /* 点赞 */
+    .like{ font-size:4em;color: #ffffff; cursor:pointer;transition: all 0.4s;}
+    .like:hover{transform: scale(1.3)}
+    .cs{ont-size:4em;color:#f00;cursor:pointer;}
 {% endblock style %}
 
 {% block photo %}
     background: url(../static/img/big-home.jpg) center;
 {% endblock photo %}
 
+<!--搜索框-->
 {% block head_right %}
-
     <div class="input-group col-md-3" style="margin-top:0px positon:relative">
         <form style="display: flex;" method="get" action="/search">
            <input type="text" class="form-control" placeholder="请输入关键字" name="keyword"
@@ -45,10 +50,12 @@
      </div>
 {% endblock head_right %}
 
+<!--博客大标题-->
 {% block title %}
 <h1 class="text-center" style="color: white;font-family: 'Arial Black'; font-size: 60px; padding-top: 90px;margin-bottom: 30px">TF'S BLOG</h1> <br>
 {% endblock title %}
 
+<!--博客主要内容，文章列表-->
 {% block content %}
 <div class="container-fluid" style="background-color: #2c2a2a69;padding-top: 70px;padding-bottom: 80px;">
     <div class="text-center" >
@@ -70,7 +77,6 @@
                                     </div>
                                 </div>
                             </a>
-{#                        </div>#}
                         <br>
                         <br>
                     {% endfor %}
@@ -100,7 +106,9 @@
                     <h2 class="posttitle" id="title"></h2>
                     <br>
                     <span id="date"></span>
+                    <script>
 
+                    </script>
                 </div>
             </a>
         <br>
@@ -128,7 +136,6 @@
                         var Href = "/post/"+ data.objects[j].Publish_year
                             +"/"+data.objects[j].Publish_month+"/"+data.objects[j].Id;
                         // 将事先定义好的id为copy的div中的元素的值进行替换，构造文章卡片的html
-                        
                         $("#img_url").css("background-image", url);
                         $("#Href").attr("href", Href);
                         $("#title").text(data.objects[j].Title);
@@ -144,7 +151,10 @@
                         var new_post=document.createElement("post");
                         new_post.innerHTML=mid;
 
+                        var list_content=
+
                         firstpage.appendChild(new_post);             // 将新产生的订单列表添加到清空了的firstpage中
+                        firstpage.append
                     }
                 },
                 error: function () {
@@ -181,8 +191,41 @@
         <div class="row" style="padding-left: 10px">
             <i class="" style="color: #b5b5b5;font-size: 18px;margin-top: 10px;margin-bottom: 0px; padding-bottom: 10px ">海到无边天作岸，山登绝顶我为峰</i>
         </div>
+        <!--点赞-->
+        <label id="like" class="like" title="喜欢我吗？">&#10084;</label>
+        <label id=like_count style="color: white">{{ website_info['like_count'] }}</label>
+        <script>
+            $(function () {
+                $(".like").click(function () {
+                    $("#like").toggleClass('cs');
+                    if($("#like").hasClass('cs')){
+                        $.ajax({								// 提交取消点赞POST请求给后端
+                        type: 'POST',
+                        url: '/like',
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#like_count").text(data.like_count);
+                        },
+                        error: function () {
+                        }
+                        })
+                    }else{
+                        $.ajax({								// 提交增加点赞POST请求给后端
+                        type: 'POST',
+                        url: '/cancel_like',
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#like_count").text(data.like_count);
+                        },
+                        error: function () {
+                        }
+                        })
+                    }
+                })
+            })
+        </script>
         <!--标签云-->
-        <div class="right-module">
+        <div class="right-module" >
             <h5 style="color: white">标签云</h5><hr class="faded">
             <br>
             {% for tag in index_tag %}
